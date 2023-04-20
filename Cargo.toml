@@ -1,0 +1,31 @@
+[package]
+name = "data_manipulation"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+num_cpus = "*"
+csv = "*"
+rayon = "*"
+encoding_rs = "*"
+encoding_rs_io = "*"
+serde = { version = "*", features = ["derive"] }
+serde_json = { version = "*", features = ["preserve_order"] }
+serde_derive = "*"
+serde-aux = "*"
+chrono = { version = "0.4", features = ["serde", "rustc-serialize", "unstable-locales"] }
+itertools = "*"
+memmap2 = "*"
+dashmap = { version = "*", features = ["rayon"] }
+pathfinding = "*"
+
+[profile.release]
+# https://doc.rust-lang.org/cargo/reference/profiles.html
+strip = true       # Automatically strip symbols from the binary
+opt-level = "z"    # Optimize for size
+lto = true         # Enable link time optimization
+codegen-units = 1  # Use a single codegen for size optimization
+panic = "abort"    # Remove traceback information
+incremental = true # Save information to disk, improving re-compile times.
