@@ -4,11 +4,22 @@ use std::{
     process::Command,
 };
 
+// https://stackoverflow.com/questions/34837011/how-to-clear-the-terminal-screen-in-rust-after-a-new-line-is-printed
+// https://stackoverflow.com/questions/65497187/cant-run-a-system-command-in-windows
 pub fn clear_terminal_screen() {
     if cfg!(target_os = "windows") {
-        Command::new("cls").status().unwrap();
+        Command::new("cmd")
+            .args(["/c", "cls"])
+            .spawn()
+            .expect("cls command failed to start")
+            .wait()
+            .expect("failed to wait");
     } else {
-        Command::new("clear").status().unwrap();
+        Command::new("clear")
+            .spawn()
+            .expect("clear command failed to start")
+            .wait()
+            .expect("failed to wait");
     };
 }
 

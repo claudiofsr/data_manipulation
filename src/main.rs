@@ -58,6 +58,9 @@ fn main() -> Result<(), Box<dyn Error>> {
     clear_terminal_screen();
     let time = Instant::now();
 
+    println!("Exemplo de uso:");
+    println!("data_manipulation 'Info do Contribuinte EFD Contribuicoes.csv' nfe_float64.csv\n");
+
     #[allow(clippy::redundant_closure)]
     let (groupby_a, groupby_b) = rayon::join(
         || analise_file_a(),
